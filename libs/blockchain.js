@@ -36,7 +36,7 @@ class Blockchain {
         "Received a chain that is not longer than the current chain."
       );
       return;
-    } else if (!this.isValidChain(newChain)) {
+    } else if (!Blockchain.isValidChain(newChain)) {
       console.log("Received invalid chain");
       return;
     }
