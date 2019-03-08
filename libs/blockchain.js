@@ -12,7 +12,7 @@ class Blockchain {
     return block;
   }
 
-  isValid(chain) {
+  static isValidChain(chain) {
     if (JSON.stringify(chain[0]) !== JSON.stringify(Block.genesis()))
       return false;
 
@@ -28,6 +28,21 @@ class Blockchain {
     }
 
     return true;
+  }
+
+  replaceChain(newChain) {
+    if (newChain.length <= this.chain.length) {
+      console.log(
+        "Received a chain that is not longer than the current chain."
+      );
+      return;
+    } else if (!this.isValidChain(newChain)) {
+      console.log("Received invalid chain");
+      return;
+    }
+
+    console.log("Replacing blockchain with the new chain.");
+    this.chain = newChain;
   }
 }
 
