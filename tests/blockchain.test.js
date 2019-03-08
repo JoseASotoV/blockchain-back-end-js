@@ -18,4 +18,6 @@ describe("Blockchain", () => {
 
     expect(bc.chain[bc.chain.length - 1].data).toEqual(data);
   });
+
+  it("validates a chain");
 });
