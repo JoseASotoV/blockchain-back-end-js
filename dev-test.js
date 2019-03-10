@@ -1,7 +1,4 @@
-const Blockchain = require("./blockchain/libs/blockchain");
+const Wallet = require("./wallet/libs/wallet");
+const wallet = new Wallet();
 
-const bc = new Blockchain();
-
-for (let i = 0; i < 10; i++) {
-  console.log(bc.addBlock(`foo ${i}`).toString());
-}
+console.log(wallet.toString());
