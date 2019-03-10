@@ -4,7 +4,7 @@ class Transaction {
   constructor() {
     this.id = ChainUtil.id();
     this.input = null;
-    this.output = [];
+    this.outputs = [];
   }
 
   static newTransaction(senderWallet, recipient, amount) {
@@ -15,7 +15,7 @@ class Transaction {
       return;
     }
 
-    transaction.output.push(
+    transaction.outputs.push(
       ...[
         {
           amount: senderWallet.balance - amount,
@@ -38,7 +38,7 @@ class Transaction {
       timestamp: Date.now(),
       amount: senderWallet.balance,
       address: senderWallet.publicKey,
-      signature: senderWallet.sign(ChainUtil.hash(transaction.output))
+      signature: senderWallet.sign(ChainUtil.hash(transaction.outputs))
     };
   }
 
@@ -46,7 +46,7 @@ class Transaction {
     return ChainUtil.verifySignature(
       transaction.input.address,
       transaction.input.signature,
-      ChainUtil.hash(transaction.output)
+      ChainUtil.hash(transaction.outputs)
     );
   }
 }

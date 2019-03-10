@@ -13,14 +13,14 @@ describe("Transaction", () => {
 
   it("outputs the `amount` substracted from the wallet balance", () => {
     expect(
-      transaction.output.find(output => output.address === wallet.publicKey)
+      transaction.outputs.find(output => output.address === wallet.publicKey)
         .amount
     ).toEqual(wallet.balance - amount);
   });
 
   it("outputs the `amount` added to the recipient", () => {
     expect(
-      transaction.output.find(output => output.address === recipient).amount
+      transaction.outputs.find(output => output.address === recipient).amount
     ).toEqual(amount);
   });
 
@@ -33,7 +33,7 @@ describe("Transaction", () => {
   });
 
   it("invalidates a corrupt transaction", () => {
-    transaction.output[0].amount = 50000;
+    transaction.outputs[0].amount = 50000;
     expect(Transaction.verifyTransaction(transaction)).toBe(false);
   });
 
