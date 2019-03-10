@@ -35,11 +35,19 @@ class Transaction {
 
   static signTransaction(transaction, senderWallet) {
     transaction.input = {
-      timestamp: DataCue.now(),
+      timestamp: Date.now(),
       amount: senderWallet.balance,
       address: senderWallet.publicKey,
       signature: senderWallet.sign(ChainUtil.hash(transaction.output))
     };
+  }
+
+  static verifyTransaction(transaction) {
+    return ChainUtil.verifySignature(
+      transaction.input.address,
+      transaction.input.signature,
+      ChainUtil.hash(transaction.output)
+    );
   }
 }
 
