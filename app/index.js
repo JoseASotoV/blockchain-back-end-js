@@ -40,6 +40,11 @@ app.post("/transact", (req, res) => {
   res.redirect("/transactions");
 });
 
+// allowing users to get their own public key, so that they can share it with other people
+app.get("/public-key", (req, res) => {
+  res.json({ publicKey: wallet.publicKey });
+});
+
 app.listen(HTTP_PORT, () => {
   console.log(`Listening on port ${HTTP_PORT}`);
 });
